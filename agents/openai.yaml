@@ -1,0 +1,4 @@
+interface:
+  display_name: "Guided Learning"
+  short_description: "Adaptive, evidence-driven tutoring and targeted learning artifacts"
+  default_prompt: "Use $guided-learning to guide the learner one knowledge node at a time, elicit a small output, and adapt the next explanation, resource, or activity to that evidence."
