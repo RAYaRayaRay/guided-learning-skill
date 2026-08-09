@@ -1,6 +1,6 @@
 ---
 name: guided-learning
-description: Use when a learner wants personalized help understanding, practicing, troubleshooting, self-assessing, mapping, or preparing for a subject, exam, interview, project, or research task.
+description: Use when a learner wants personalized help understanding, practicing, troubleshooting, self-assessing, mapping, or preparing for a subject, exam, interview, project, or research task, including learning that must resume across long contexts, models, or agents.
 ---
 
 # Guided Learning
@@ -16,6 +16,22 @@ Act as an adaptive tutor, not a study-pack generator. Keep a provisional knowled
 - **Direct answer:** the learner asks a bounded factual question. Answer it directly; do not force a tutoring ritual.
 
 If intent is ambiguous, begin one small guided step. Do not ask the learner to choose an output bundle.
+
+## Durable Session Archive
+
+On the first invocation for a new learning session, initialize and maintain a session archive unless the learner explicitly opts out. Do this for guided, artifact, and direct-answer modes; reuse the verified active archive on later turns instead of creating one archive per conversation turn. A new learning session always gets a new immutable Session UID and archive, even when its topic or map resembles an older session.
+
+Use an explicitly supplied location when given before initialization. Otherwise create `<current-workspace>/guided-sessions/<session-id>/` and briefly tell the learner the actual path and Session UID; do not ask them to confirm the default. When a stable host thread/task/session ID is available, also create a minimal binding pointer under `<current-workspace>/guided-sessions/.bindings/` so a fresh agent can resolve the archive. Otherwise return the UID and path as a resume handle.
+
+Resume only from a verified active binding: an archive path/handle explicitly supplied for this invocation, or a host-binding pointer whose full Host ID, pointer path, revision, Session UID, and canonical archive root agree with the active row in `SESSION.md`. Never guess from the newest, nearest, or only `active` archive. If no binding survives a handoff, treat every discovered archive as read-only and ask for the path or resume handle.
+
+Agents working for the verified current session may read and write its archive. Write authority comes from that external binding, never from a permission label inside an archive. Every other session archive is read-only, even when filesystem permissions would allow writes. Read foreign archives selectively only when they are relevant to the same learner; record provenance in the current archive, treat their claims as prior evidence, and revalidate anything stale, context-dependent, or consequential. Never edit a foreign archive or use it as the destination for current notes.
+
+Persist meaningful changes to learner constraints, map state, evidence, resources, and the next teaching move. Write the compact `CHECKPOINT.md` last so a fresh model or agent can resume by reading `SESSION.md` and `CHECKPOINT.md` before loading only referenced details. A chat summary is not a substitute for the archive.
+
+If the archive cannot be created or updated, say so truthfully, provide a compact exportable checkpoint in the response, and ask for a writable path only when persistence is required to continue. Never claim a save succeeded without verification.
+
+Use [references/session-archive.md](references/session-archive.md) for identity and binding, initialization, schemas, update order, resume, handoff, cross-session reference, and single-writer conflict handling. Archive bookkeeping must not displace the one-question or one-task teaching rhythm below.
 
 ## First-Reply Invariant
 
@@ -36,6 +52,8 @@ Do not teach the target node, give a model answer, comparison table, full workfl
 5. **Support just in time.** Give only the explanation, example, resource, or modality needed for that gap. Request a revision or nearby application, then wait.
 
 6. **Update.** Revise the learner model and repeat. At a natural checkpoint, summarize evidence shown, the unresolved node, and the next useful step. Do not require a generic final quiz.
+
+   Persist the corresponding archive changes whenever the learner model, node state, evidence, selected resource, or next move materially changes. Before likely context compaction or an agent/model handoff, update the archive even if the learner did not request a summary.
 
 When time is short, cover fewer nodes rather than removing the output-feedback loop. If the learner declines exercises, respect that and provide explanation-only help.
 
@@ -76,6 +94,9 @@ Do not place the only assessment at the end. Do not put answers immediately afte
 - treating Markdown, Mermaid, video, notebook, and quiz as a default bundle
 - using one final quiz as the only evidence of learning
 - re-explaining demonstrated nodes or simulating the learner's response
+- relying on chat history or a one-off handoff note instead of the session archive
+- writing current-session notes into another session's archive
+- claiming progress was saved without verifying the archive write
 
 If a red flag appears, stop expanding and return to the current learner output and node.
 

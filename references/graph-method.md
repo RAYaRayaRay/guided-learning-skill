@@ -46,8 +46,8 @@ Do not ask for evidence from several unseen nodes at once. Review one node's out
 
 When a full graph is requested, show dependency order, required versus optional branches, and common confusions. Add a compact checkpoint table:
 
-| Core node | Learner output | Advance criterion |
-|---|---|---|
+| Core node | Learner output | Advance criterion | Pause |
+|---|---|---|---|
 
 Use Mermaid only when visual structure materially helps. A plain outline is better when the graph is small.
 
