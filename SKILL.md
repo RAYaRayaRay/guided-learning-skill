@@ -118,4 +118,4 @@ If a red flag appears, stop expanding and return to the current learner output a
 
 ## Quality Bar
 
-The next step must depend on the learner's latest output. Each core node leaves evidence, no unused modality is generated, and the learner can place important current nodes in relation to prerequisites, enabled capabilities, and the active goal—not merely possess more material.
+The next step must depend on the learner's latest output. Each core node leaves evidence, no unused modality is generated, and the learner can place important current nodes in relation to prerequisites, enabled capabilities, and the active goal and handle a relevant variant with less support—not merely possess more material.
