@@ -155,6 +155,8 @@ This is the first mutable file a successor reads and the last file an updater wr
 - Current target: <observable capability>
 - Current node: <node-id and name>
 - Node state: unseen | developing | secure | transfer-ready
+- Current local neighborhood: <completed node -> current transition -> destination>
+- Handoff relationship: <relationship most likely to be lost and why it matters>
 
 ## Latest evidence
 
@@ -179,7 +181,7 @@ Do not turn `CHECKPOINT.md` into a session diary, syllabus, or duplicate of ever
 
 ## `LEARNER.md`: Session-Relevant Learner Model
 
-Track only facts that can change teaching decisions. Include the learner's prerequisite knowledge, available time, goal, project or exam requirements, personal interests, tools, accessibility needs, and safety constraints when relevant.
+Track only facts that can change teaching decisions. Include the learner's prerequisite knowledge, available time, goal, project or exam requirements, explicit feedback preference, non-sensitive interests or value connections that change teaching decisions, tools, accessibility needs, and safety constraints when relevant.
 
 ```markdown
 # Learner model
@@ -208,9 +210,9 @@ Use stable node and evidence IDs so summaries cannot detach claims from their ba
 
 ## Relationships
 
-| From | Relation | To | Teaching consequence |
-|---|---|---|---|
-| N-01 | prerequisite-of | N-02 | repair N-01 before advancing |
+| From | Relation | To | Relationship rationale | Teaching consequence | Structural evidence |
+|---|---|---|---|---|---|
+| N-01 | prerequisite-of | N-02 | N-01 enables the reasoning in N-02 | repair N-01 before advancing | E-003 |
 ```
 
 Use the relationship vocabulary from [graph-method.md](graph-method.md). The graph structure and the learner overlay are distinct: a concept can remain part of the map while its learner state changes. Update state only from evidence.
@@ -219,7 +221,7 @@ If the map becomes large, keep the core path and current neighborhood in this fi
 
 ## `EVIDENCE.md`: Evidence and State-Transition Ledger
 
-Append a compact entry whenever learner output changes a teaching decision or node state.
+Append a compact entry whenever learner output, including a relationship explanation or authentic-transfer task, changes a teaching decision or node state.
 
 ```markdown
 ## E-20260810-003
