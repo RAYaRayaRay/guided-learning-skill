@@ -181,7 +181,7 @@ Do not turn `CHECKPOINT.md` into a session diary, syllabus, or duplicate of ever
 
 ## `LEARNER.md`: Session-Relevant Learner Model
 
-Track only facts that can change teaching decisions. Include the learner's prerequisite knowledge, available time, goal, project or exam requirements, explicit feedback preference, non-sensitive interests or value connections that change teaching decisions, tools, accessibility needs, and safety constraints when relevant.
+Track only facts that can change teaching decisions. Include the learner's prerequisite knowledge, available time, goal, project or exam requirements, explicit feedback preference (frequency, tone, and intensity), non-sensitive interests or value connections that change teaching decisions, tools, accessibility needs, and safety constraints when relevant.
 
 ```markdown
 # Learner model
@@ -189,6 +189,7 @@ Track only facts that can change teaching decisions. Include the learner's prere
 | Field | Current value | Source or evidence | Last confirmed | Recheck when |
 |---|---|---|---|---|
 | Available time | 4 h/week | learner statement | <time> | schedule changes |
+| Feedback preference | minimal, neutral tone | learner statement | <time> | learner response changes |
 ```
 
 Separate learner statements from tutor inference. Mark uncertain inferences as provisional. Reconfirm drift-prone facts such as deadlines, available time, goals, and project requirements rather than silently carrying them forever.
@@ -253,7 +254,7 @@ This preserves why a modality was chosen and prevents future agents from repeati
 
 Update the archive when any of these occurs:
 
-- the learner confirms or changes a goal, deadline, available time, project requirement, interest, tool, or constraint;
+- the learner confirms or changes a goal, deadline, available time, project requirement, explicit feedback preference, interest, tool, or constraint;
 - a learner output creates evidence, reveals a misconception, or changes a node state;
 - the tutor chooses a resource or modality and later observes its result;
 - the current node, planned next task, or branch decision changes;
